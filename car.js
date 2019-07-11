@@ -1,6 +1,7 @@
 const make = document.getElementById('make');
 const year = document.getElementById('year');
 const modelNamesList = document.getElementById('modelNames');
+const info = document.getElementById('info');
 const searchBtn = document.querySelector('.searchBtn');
 const apiBase = `https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformakeyear/`;
 const apiMake = `make/`;
@@ -10,12 +11,13 @@ const apiFormat = `?format=json`;
 searchBtn.addEventListener('click', ()=>{
 	if (make.value.length && year.value.length) {
 		apiRequest(make.value, year.value);
+		modelNamesList.innerHTML = '';
 	}
 })
 
 function apiRequest(make, year) {
 	const api = apiBase + apiMake + make + apiYear + year + apiFormat;
-
+	const li = document.createElement('li');
 
 	fetch(api)
 		.then(response =>{
